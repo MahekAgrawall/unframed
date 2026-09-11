@@ -108,6 +108,18 @@ public class ArtworkService {
         artworkRepository.delete(artwork);
     }
 
+    public List<ArtworkResponse> searchArtworks(String query) {
+
+        return artworkRepository
+                .findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrderByCreatedAtDesc(
+                        query,
+                        query
+                )
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
     private ArtworkResponse mapToResponse(Artwork artwork) {
 
         ArtworkResponse response = new ArtworkResponse();

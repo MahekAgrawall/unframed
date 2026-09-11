@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @RestController
@@ -33,6 +33,13 @@ public class ArtworkController {
     @GetMapping
     public List<ArtworkResponse> getAllArtworks() {
         return artworkService.getAllArtworks();
+    }
+
+    @GetMapping("/search")
+    public List<ArtworkResponse> searchArtworks(
+            @RequestParam String query) {
+
+        return artworkService.searchArtworks(query);
     }
 
     @GetMapping("/{id}")
